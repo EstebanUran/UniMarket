@@ -15,4 +15,6 @@ public interface ComentarioServicio {
     List<ComentarioGetDTO> listarComentariosProducto(int codigoProducto) throws Exception;
 
     Comentario actualizarComentario(ActualizarComentarioDTO actualizarComentarioDTO) throws Exception;
+
+    void eliminarComentario(int idComentario) throws Exception;
 }

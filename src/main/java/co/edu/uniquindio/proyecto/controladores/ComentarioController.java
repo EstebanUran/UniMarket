@@ -4,6 +4,7 @@ package co.edu.uniquindio.proyecto.controladores;
 import co.edu.uniquindio.proyecto.dto.ActualizarComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
+import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import co.edu.uniquindio.proyecto.seguridad.modelo.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.servicios.implementacion.ComentarioSericioImpl;
 import co.edu.uniquindio.proyecto.servicios.implementacion.UsuarioServicioImpl;
@@ -24,6 +25,8 @@ public class ComentarioController {
     @Autowired
     private ComentarioSericioImpl comentarioSericio;
 
+    @Autowired
+    private ComentarioRepo comentarioRepo;
 
     @PostMapping("/crear")
     public ResponseEntity<?> crearComentario(@RequestBody ComentarioDTO comentarioDTO){
@@ -52,6 +55,17 @@ public class ComentarioController {
             comentarioSericio.actualizarComentario(actualizarComentarioDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO<>(HttpStatus.CREATED,
                     false, "Se actualizo correctamente"));
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/eliminar/{codigo}")
+    public ResponseEntity<?> eliminarComentario(@PathVariable(name = "codigo") int codigo){
+        try {
+            comentarioSericio.eliminarComentario(codigo);
+            return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO<>(HttpStatus.CREATED,
+                    false, "Se elimino correctamente"));
         }catch (Exception e){
             return ResponseEntity.status(500).body(e.getMessage());
         }

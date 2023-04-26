@@ -77,4 +77,16 @@ public class ComentarioSericioImpl implements ComentarioServicio {
         return comentarioRepo.save(comentario);
 
     }
+
+    @Override
+    public void eliminarComentario(int idComentario) throws Exception{
+
+        Comentario comentario = comentarioRepo.findById(idComentario).orElse(null);
+
+        if(comentario == null ){
+            throw new Exception("No existe el comentario.");
+        }
+        comentarioRepo.delete(comentario);
+
+    }
 }
