@@ -23,11 +23,13 @@ public class UserDetailsImpl implements UserDetails {
         if(user instanceof Usuario){
             Usuario usuario = (Usuario) user;
             authorities.add( new SimpleGrantedAuthority("CLIENTE") );
+            authorities.add(new SimpleGrantedAuthority(usuario.getCedula()));
             return new UserDetailsImpl(((Usuario) user).getEmail(),
                     ((Usuario) user).getContrasena(), authorities);
         }else if(user instanceof Moderador){
             Moderador moderador = (Moderador) user;
             authorities.add( new SimpleGrantedAuthority("MODERADOR") );
+            authorities.add(new SimpleGrantedAuthority(String.valueOf(moderador.getCodigo())));
             return new UserDetailsImpl(((Moderador) user).getCorreo(),
                     ((Moderador) user).getContraseña(), authorities);
         }

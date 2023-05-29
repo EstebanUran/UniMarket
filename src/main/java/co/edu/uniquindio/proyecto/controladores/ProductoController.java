@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 @RestController
+@CrossOrigin(maxAge = 3600)
 @RequestMapping("api/productos")
 @SecurityRequirement(name = "bearerAuth")
 @AllArgsConstructor
@@ -54,7 +55,7 @@ public class ProductoController {
     }
 
     @PutMapping("/actualizar-producto-estado")
-    public ResponseEntity<?> actualizarProductoEstado(@RequestBody int codigoProducto, boolean estado){
+    public ResponseEntity<?> actualizarProductoEstado(@RequestBody int codigoProducto, int estado){
         try{
             productoServicio.actualizarProductoEstado(codigoProducto, estado);
             return ResponseEntity.status(200).body("¡Estado del producto actualizado!");
@@ -111,7 +112,7 @@ public class ProductoController {
     }
 
     @GetMapping("/listar-productos-estado/{estado}")
-    public ResponseEntity<?> listarProductosEstado(@PathVariable(name="estado") boolean estado) {
+    public ResponseEntity<?> listarProductosEstado(@PathVariable(name="estado") int estado) {
         try{
             return ResponseEntity.status(200).body(productoServicio.listarProductosEstado(estado));
         }catch (Exception e){

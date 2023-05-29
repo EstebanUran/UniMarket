@@ -17,7 +17,7 @@ public interface ProductoServicio {
 
     ProductoGetDTO actualizarProducto(int codigoProducto, ProductoDTO productoDTO) throws Exception;
 
-    void actualizarProductoEstado(int codigoProducto, boolean estado) throws Exception;
+    void actualizarProductoEstado(int codigoProducto, int estado) throws Exception;
 
     int actualizarProductoCantidad(int codigoProducto, int unidades) throws Exception;
 
@@ -30,7 +30,7 @@ public interface ProductoServicio {
 
     List<ProductoGetDTO> listarProductosEstadoModerador(int codigoModerador, Estado estado) throws Exception;
 
-    List<ProductoGetDTO> listarProductosEstado(boolean estado) throws Exception;
+    List<ProductoGetDTO> listarProductosEstado(int estado) throws Exception;
 
     List<ProductoGetDTO>  listarProductosNombre(String nombre) throws Exception;
 

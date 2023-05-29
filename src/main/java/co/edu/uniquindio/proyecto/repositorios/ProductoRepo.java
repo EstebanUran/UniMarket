@@ -12,22 +12,22 @@ import java.util.List;
 @Repository
 public interface ProductoRepo  extends JpaRepository<Producto, Integer> {
 
-    @Query("select p from Producto p where p.nombre like concat('%',:nombreProducto,'%') and current_date <= p.fechaLimite and p.estado = true")
+    @Query("select p from Producto p where p.nombre like concat('%',:nombreProducto,'%') and current_date <= p.fechaLimite and p.estado = 1")
     List<Producto> listarProductosPorNombre(String nombreProducto);
 
     @Query("select p from Producto p where p.usuario.cedula = :cedulaUsuario")
     List<Producto> listarProductosDelUsuario(String cedulaUsuario);
 
-    @Query("select p from Producto p where p.precio between :precioMin and :precioMax and current_date <= p.fechaLimite and p.estado = true")
+    @Query("select p from Producto p where p.precio between :precioMin and :precioMax and current_date <= p.fechaLimite and p.estado = 1")
     List<Producto> listarProductosPorPrecio(double precioMin, double precioMax);
 
-    @Query("select p from Producto p where :categoria member of p.categoria and current_date <= p.fechaLimite and p.estado = true")
+    @Query("select p from Producto p where :categoria member of p.categoria and current_date <= p.fechaLimite and p.estado = 1")
     List<Producto> listarProductoCategoria(Categoria categoria);
 
     @Query ("select p from Producto p where p.estado = :estado and current_date <= p.fechaLimite")
-    List<Producto> listarProductosEstado(boolean estado);
+    List<Producto> listarProductosEstado(int estado);
 
-    @Query("select f from Usuario u join u.productofavorito f where u.cedula = :cedulaUsuario and f.estado = true")
+    @Query("select f from Usuario u join u.productofavorito f where u.cedula = :cedulaUsuario and f.estado = 1")
     List<Producto> listarProductosFavoritos(String cedulaUsuario);
 
     @Query("select p from Producto p inner join LogPublicacion l on p.codigo = l.producto.codigo where l.moderador.codigo = :codigoModerador and l.estado = :estado")

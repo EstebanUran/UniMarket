@@ -54,7 +54,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public void actualizarProductoEstado(int codigoProducto, boolean estado) throws Exception {
+    public void actualizarProductoEstado(int codigoProducto, int estado) throws Exception {
         validarProductoExiste(codigoProducto);
         Producto producto = obtener(codigoProducto);
         producto.setEstado(estado);
@@ -137,7 +137,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosEstado(boolean estado) throws Exception {
+    public List<ProductoGetDTO> listarProductosEstado(int estado) throws Exception {
         List<Producto> listaProductosEstado = productoRepo.listarProductosEstado(estado);
 
         if(listaProductosEstado.isEmpty()) {
@@ -239,7 +239,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setUsuario(usuarioServicio.obtener(productoDTO.getCedulaUsuario()));
         producto.setImagen(imagen);
         producto.setCategoria(productoDTO.getCategorias());
-        producto.setEstado(false);
+        producto.setEstado(0);
         producto.setFechaCreacion( LocalDateTime.now());
         producto.setFechaLimite(LocalDateTime.now().plusDays(60));
         return producto;
@@ -249,7 +249,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         ProductoGetDTO productoGetDTO = new ProductoGetDTO(
                 producto.getCodigo(),
                 producto.getFechaLimite(),
-                producto.isEstado(),
+                producto.getEstado(),
                 producto.getFechaCreacion(),
                 producto.getNombre(),
                 producto.getDescripcion(),

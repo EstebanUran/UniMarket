@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -40,7 +41,7 @@ public class Producto implements Serializable {
     private LocalDateTime fechaLimite;
 
     @Column(nullable = false)
-    private boolean estado;
+    private int estado;
 
 
     /// crea la tabla de las imagenes

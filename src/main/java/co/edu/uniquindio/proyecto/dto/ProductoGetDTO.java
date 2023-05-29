@@ -17,7 +17,7 @@ public class ProductoGetDTO {
 
     private LocalDateTime fechaLimite;
 
-    private boolean estado;
+    private int estado;
 
     private LocalDateTime fechaCreacion;
 
